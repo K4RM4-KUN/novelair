@@ -17,7 +17,8 @@ class CreateSubscriptionsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->lenght(20);
             $table->unsignedBigInteger('subscriber_id')->lenght(20);
-            $table->float('suscription_price',6,2);
+            $table->float('subscription_price',6,2);
+            $table->date('caducate_at')->default(date("Y-m-d H:i:s", strtotime('first day of this month')));
             $table->timestamps();
         });
     }

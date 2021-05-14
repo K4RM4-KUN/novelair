@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Novel;
 use App\Models\Chapter;
+use App\Models\Mark;
+use App\Models\UNS;
+use App\Models\States;
+use Illuminate\Support\Facades\DB;
 
 class NovelManager extends Controller
 {
@@ -16,12 +20,30 @@ class NovelManager extends Controller
      */
     public function index()
     {
-        //
-        $data["novels"] = Novel::with("chapters")->
+        //$data["followers"] = count((UNS::where('novel_id',1)->where("state_id",(States::where('state_name', "following")->first())->id)->get()));
+        $data["novels"] = Novel::
+        withCount([ 'uns','uns as uns_count' => function ($query) {
+            $query->where('state_id',(States::where('state_name', "following")->first())->id);
+        }])->
+        with("chapters")->
+        withSum('chapters', 'views')->
         withCount("chapters")->
         where("user_id",Auth::user()->id)->
         orderbydesc('created_at')->
         get();
+        $data["viewStats"] = 0;
+        $data["followersStats"] = 0;
+        foreach($data["novels"] as $novel){
+            $data["viewStats"] += $novel->chapters_sum_views;        
+            $data["followersStats"] += $novel->uns_count;
+            $pos = Mark::where('novel_id',$novel->id)->where("like",1)->get();
+            $neg =  Mark::where('novel_id',$novel->id)->where("like",0)->get();
+            if(count($pos)+count($neg) != 0){
+                $novel->SetAttribute("Mark", round(((count($pos)*100)/(count($pos)+count($neg)))/10,1));
+            } else {
+                $novel->SetAttribute("Mark",0);
+            }
+        }
         return view("novelManager",$data);
     }
 
