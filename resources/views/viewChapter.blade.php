@@ -12,14 +12,15 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="icon" href="{{ URL::asset('favicon.ico') }}" type="image/x-icon"/>
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
 
     <!-- Body: Tailwind el "bg" funciona raro, no llena toda la pantalla -->
-    <body class="bg-gradient-to-br from-gray-700 to-gray-900 min-h-screen container mx-auto min-h-screen">
-
+    <body class="bg-gradient-to-br from-gray-700 to-gray-800 min-h-screen">
+        @include('layouts.navigationNew')
         <!-- Pequeño page history: Solo habra un boton de "BACK" -->
         <div class="container mt-5 ">
 
@@ -127,7 +128,7 @@
 
                 <div class="flex items-center justify-center">
 
-                    <img class="preview w-1/2 mt-5 mb-2 mx-5" src="{{ asset($preview) }}" alt="Preview">
+                    <img class="preview w-1/3 mt-5 mb-2 mx-5" src="{{ asset($preview) }}" alt="Preview">
 
                 </div>
 
@@ -155,6 +156,7 @@
         </div>
 
 
+        @include('layouts.footer')
     </body>
     
 </html>

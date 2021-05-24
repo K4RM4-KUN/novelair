@@ -27,7 +27,7 @@ class ChapterSecurity
             //dd($userNovels,Auth::user()->id,"hello");
             return $next($request);
         } else {
-            //return redirect('/dashboard');
+            //return redirect('/');
         }
     }
 }

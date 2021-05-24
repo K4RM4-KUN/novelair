@@ -14,6 +14,7 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="icon" href="{{ URL::asset('favicon.ico') }}" type="image/x-icon"/>
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
@@ -24,8 +25,8 @@
     </head>
 
     <!-- Body: Tailwind el "bg" funciona raro, no llena toda la pantalla -->
-    <body class="bg-gradient-to-br from-gray-700 to-gray-800 container mx-auto min-h-screen">
-
+    <body class="bg-gradient-to-br from-gray-700 to-gray-800 min-h-screen">
+        @include('layouts.navigationNew')
         <!-- Pequeño page history: Solo habra un boton de "BACK" -->
         <div class="container mt-5">
 
@@ -137,6 +138,7 @@
 
         </div>
 
+        @include('layouts.footer')
     <script>
         $(document).ready(()=>{
             $(".amount").text("Image amount: "+$(".contentImg").length)

@@ -8,9 +8,11 @@
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="icon" href="{{ URL::asset('favicon.ico') }}" type="image/x-icon"/>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -24,6 +26,7 @@
 <body class="bg-gradient-to-br from-gray-700 to-gray-900 min-h-screen">
     
     @include('layouts.navigationNew')
+    @include('cookieConsent::index')
     
     <div class="flex flex-wrap w-11/12 sm:w-10/12 mx-auto bg-black bg-opacity-30">
         <div class="flex | w-full | bg-black bg-opacity-60">
@@ -65,7 +68,7 @@
                             <!-- Orden -->
                             <div class="my-4 ml-3">
                                 <label for="order">Order</label>
-                                <select name="order" class="text-black" id="order">
+                                <select name="order" class="text-black w-full" id="order">
                                     <option value="desc" @if ($filters["order"] == 0) selected @endif>Más nuevos</option>
                                     <option value="asc" @if ($filters["order"] == 1) selected @endif>Más viejos</option>
                                     <option value="more" @if ($filters["order"] == 2) selected @endif>Más capitulos</option>
@@ -128,18 +131,19 @@
 
                             <hr class="w-9/12 mx-auto justify-items-center">
 
-                            <!-- Nota
-                                <div class="my-4 ml-3">
-                                    <label for="markOrder">Nota:</label>
-                                    <select name="markOrder" class="text-black" id="markOrder">
-                                        <option value="mas">Mayor</option>
-                                        <option value="men">Menor</option>
-                                    </select>
-                                    <input type="number" class="text-black" name="mark" value="0" min="0" max="10">
-                                </div>
+                            <!-- Genero -->
+                            <div class="my-4 ml-3">
+                                <label for="genre">Genero</label>
+                                <select class="mi-selector shadow-lg border-none appearance-none rounded w-full py-2 px-3 text-white leading-tight"
+                                    name="genre">
+                                        <option value='null'>Todos</option>
+                                        @foreach($genres as $genre)
+                                            <option value='{{$genre->id}}'  @if ($filters["genre"] == $genre->id) selected @endif>{{strtoupper($genre->name)}}</option>
+                                        @endforeach
+                                </select>
+                            </div>
 
-                                <hr class="w-9/12 mx-auto justify-items-center">
-                            -->
+                            <hr class="w-9/12 mx-auto justify-items-center">
 
                             <!-- +18 -->
                             <div class="my-4 ml-3">
@@ -159,22 +163,6 @@
                             </div>
 
                             <hr class="w-9/12 mx-auto justify-items-center">
-
-                            <!-- Tags -->
-                            <div class="my-4 ml-3">
-                                <input name="filtrarTag" id="filtrarTag" type="checkbox" @if ($filters["tag"] != 0) checked @endif>
-                                <label for="filtrarTag">
-                                    Filtrar por tag
-                                </label>
-                                <div class="tagsDiv flex flex-wrap">
-                                    @foreach ($tags as $tag)
-                                        <div class="mx-2 my-1">
-                                            <input type="radio" id="{{$tag->id}}" name="tag" value="{{$tag->id}}" @if ($filters["tag"] == $tag->id) checked @endif>
-                                            <label for="{{$tag->id}}">{{$tag->tag_name}}</label><br>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </form>
@@ -203,7 +191,7 @@
 
                                     <div class="w-1/1 | flex justify-between | |">
                                         
-                                        <p class="bg-{{$result->novel_type}} | px-1 m-0.5 | rounded | text-xs text-white font-bold">{{strtoupper($result->novel_type)}}</p>
+                                        <p class="bg-{{$result->novel_type}} bg-purple-700 | px-1 m-0.5 | rounded | text-xs text-white font-bold | truncate">{{strtoupper($result->novel_type)}}</p>
                                         <p class="hidden sm:block bg-black bg-opacity-60 | px-1 py-0.5 | text-xs text-white font-bold">{{$result->mark}}/10</p>
 
                                     </div>
@@ -212,7 +200,9 @@
                             
                                 <div class="w-full">
                                     
-                                    <p class="bg-black bg-opacity-60 | py-2 px-2 | w-1/1 | text-center text-xs text-white font-bold | truncate">{{strtoupper($result->genre)}}</p>
+                                    <p class="bg-black bg-opacity-60 | py-2 px-2 | w-1/1 | text-center text-xs text-white font-bold | truncate">
+                                        @foreach($genres as $genre) @if($genre->id == $result->genre) {{strtoupper($genre->name)}} @endif @endforeach
+                                    </p>
  
                                 </div>
                             </div>
@@ -241,7 +231,7 @@
 
                                 <div class="w-1/1 | flex justify-between | |">
                                     
-                                    <p class="bg-{{$result->novel_type}} | px-1 m-0.5 | rounded | text-xs text-white font-bold">{{strtoupper($result->novel_type)}}</p>
+                                    <p class="bg-{{$result->novel_type}} bg-purple-700 | px-1 m-0.5 | rounded | text-xs text-white font-bold | truncate">{{strtoupper($result->novel_type)}}</p>
                                     <p class="hidden sm:block bg-black bg-opacity-60 | px-1 py-0.5 | text-xs text-white font-bold">{{$result->mark}}/10</p>
 
                                 </div>
@@ -250,7 +240,9 @@
                         
                             <div class="w-full">
                                 
-                                <p class="bg-black bg-opacity-60 | py-2 px-2 | w-1/1 | text-center text-xs text-white font-bold | truncate">{{strtoupper($result->genre)}}</p>
+                                <p class="bg-black bg-opacity-60 | py-2 px-2 | w-1/1 | text-center text-xs text-white font-bold | truncate">
+                                    @foreach($genres as $genre) @if($genre->id == $result->genre) {{strtoupper($genre->name)}} @endif @endforeach
+                                </p>
 
                             </div>
                         </div>
@@ -260,5 +252,12 @@
             </div>
         </div>
     </div>
+
+    @include('layouts.footer')
+    
+    <script id="functions" src="{{ asset('js/recomendedAuthorsJS.js') }}" defer></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    
 </body>
 </html>

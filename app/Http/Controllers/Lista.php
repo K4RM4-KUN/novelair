@@ -30,17 +30,18 @@ class Lista extends Controller
         if(States::where('state_name', $list)->exists()){
             $data["novels"] =  Novel::whereHas('uns', function ($query) use ($list){
                 return $query->where('user_id',Auth::user()->id)->where('state_id',(States::where('state_name', $list)->first())->id);
-            })->get();
+            })->where('public',1)->get();
 
             foreach($data["novels"] as $key=>$novel){
 
-                $chapt = Chapter::where('novel_id',$novel->id)->orderbydesc('chapter_n')->first();
+                $chapt = Chapter::where([['novel_id',$novel->id],['public',1]])->orderbydesc('chapter_n')->first();
                 $last = User_LastView::where([['user_id', Auth::user()->id],['novel_id',$novel->id]])->get();
 
-                if(count($last) != 0 && $chapt->chapter_n == $last[0]->chapter_n && $filter != "all"){
+                if(count($last) != 0 && $chapt->chapter_n <= $last[0]->chapter_n && $filter != "all"){
                 
-                    if($chapt->chapter_n == $last[0]->chapter_n){
+                    if($chapt->chapter_n <= $last[0]->chapter_n){
                         unset($data["novels"][$key]);
+
                     }
 
                 } else {
@@ -65,21 +66,30 @@ class Lista extends Controller
                         $novel->SetAttribute('lastview',$last[0]->chapter_n);
     
                     }
+
                     //Nota
                     $pos = Mark::where('novel_id',$novel->id)->where("like",1)->get();
                     $neg =  Mark::where('novel_id',$novel->id)->where("like",0)->get();
+
                     if(count($pos)+count($neg) != 0){
                         $novel->SetAttribute('mark',round(((count($pos)*100)/(count($pos)+count($neg)))/10,1));
+
                     } else {
                         $novel->SetAttribute('mark',0);
+
                     }
+
                 }
                 
             }
+
             $data['novels'] = $data['novels']->sortbydesc('lastnovels');
+
         } else {
             return redirect(url('listas/following'));
+
         }
+        
         //dd($data['novels']);
         return view('list.lists',$data);
     }

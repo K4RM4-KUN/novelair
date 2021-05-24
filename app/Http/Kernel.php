@@ -21,6 +21,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        \Spatie\CookieConsent\CookieConsentMiddleware::class,
     ];
 
     /**
@@ -64,5 +65,10 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'novelsecurity' => \App\Http\Middleware\NovelSecurity::class,
         'chaptersecurity' => \App\Http\Middleware\ChapterSecurity::class,
+        'publicnovelsecurity' => \App\Http\Middleware\PublicNovelSecurity::class,
+        'publicchaptersecurity' => \App\Http\Middleware\PublicChapterSecurity::class,
+        'subscribesecurity' => \App\Http\Middleware\SubscribeSecurity::class,
+        'userblocked' => \App\Http\Middleware\UserBlocked::class,
+        'adminsecurity' => \App\Http\Middleware\AdminSecurity::class,
     ];
 }

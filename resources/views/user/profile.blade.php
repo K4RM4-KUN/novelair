@@ -31,7 +31,7 @@
                 Fondo de perfil(Fotos de 9:16):
             </label>
             <div class="flex items-center justify-around">
-                <img class="rounded-full" width="10% " src="{{asset($image)}}" alt="">
+                <img class="rounded-full | w-4/12 sm:w-3/12 lg:w-2/12" src="{{asset($image)}}" alt="">
                 <input class="border-none appearance-none rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline" 
                 name="bgImage" 
                 type="file"
@@ -208,7 +208,7 @@
                     <div class="flex items-center justify-start">
                         <select class="mi-selector shadow-lg border-none appearance-none rounded w-3/6 py-2 px-3 text-whtie leading-tight"
                             name="autor1">
-                                <option value='' @if($authorsUsername['authors1'] == "") selected @endif></option>
+                                <option value='' @if($authorsUsername['authors1'] == "") selected @endif>elige un usuario</option>
                                 @foreach($users as $user)
                                     <option value='{{$user->username}}' @if($authorsUsername['authors1'] == $user->username) selected @endif>{{$user->username}}</option>
                                 @endforeach
@@ -218,7 +218,7 @@
                             id="autor1"
                             name="checkAutor1" 
                             checked>
-                        <label for="autor1" class="text-white">Mostrar</label>
+                        <label for="autor1" class="hidden sm:block text-white">Mostrar</label>
                     </div>
                 
                 </div>
@@ -232,7 +232,7 @@
                     <div class="flex items-center justify-start">
                         <select class="mi-selector shadow-lg border-none appearance-none rounded w-3/6 py-2 px-3 text-whtie leading-tight"
                             name="autor2">
-                                <option value='' @if($authorsUsername['authors2'] == "") selected @endif></option>
+                                <option value='' @if($authorsUsername['authors2'] == "") selected @endif>elige un usuario</option>
                                 @foreach($users as $user)
                                     <option value='{{$user->username}}' @if($authorsUsername['authors2'] == $user->username) selected @endif>{{$user->username}}</option>
                                 @endforeach
@@ -242,7 +242,7 @@
                             id="autor2"
                             name="checkAutor2" 
                             checked>
-                        <label for="autor2" class="text-white">Mostrar</label>
+                        <label for="autor2" class="hidden sm:block text-white">Mostrar</label>
                     </div>
                 
                 </div>
@@ -256,7 +256,7 @@
                     <div class="flex items-center justify-start">
                         <select class="mi-selector shadow-lg border-none appearance-none rounded w-3/6 py-2 px-3 text-whtie leading-tight"
                             name="autor3">
-                                <option value='' @if($authorsUsername['authors3'] == "") selected @endif></option>
+                                <option value='' @if($authorsUsername['authors3'] == "") selected @endif>elige un usuario</option>
                                 @foreach($users as $user)
                                     <option value='{{$user->username}}' @if($authorsUsername['authors3'] == $user->username) selected @endif>{{$user->username}}</option>
                                 @endforeach
@@ -266,7 +266,7 @@
                             id="autor3"
                             name="checkAutor3" 
                             checked>
-                        <label for="autor3" class="text-white">Mostrar</label>
+                        <label for="autor3" class="hidden sm:block text-white">Mostrar</label>
                     </div>
                 
                 </div>
@@ -280,7 +280,7 @@
                     <div class="flex items-center justify-start">
                         <select class="mi-selector shadow-lg border-none appearance-none rounded w-3/6 py-2 px-3 text-whtie leading-tight"
                             name="autor4">
-                                <option value='' @if($authorsUsername['authors4'] == "") selected @endif></option>
+                                <option value='' @if($authorsUsername['authors4'] == "") selected @endif>elige un usuario</option>
                                 @foreach($users as $user)
                                     <option value='{{$user->username}}' @if($authorsUsername['authors4'] == $user->username) selected @endif>{{$user->username}}</option>
                                 @endforeach
@@ -290,7 +290,7 @@
                             id="autor4"
                             name="checkAutor4" 
                             checked>
-                        <label for="autor4" class="text-white">Mostrar</label>
+                        <label for="autor4" class="hidden sm:block text-white">Mostrar</label>
                     </div>
                 
                 </div>
@@ -304,7 +304,7 @@
                     <div class="flex items-center justify-start">
                         <select class="mi-selector shadow-lg border-none appearance-none rounded w-3/6 py-2 px-3 text-whtie leading-tight"
                             name="autor5">
-                                <option value='' @if($authorsUsername['authors5'] == "") selected @endif></option>
+                                <option value='' @if($authorsUsername['authors5'] == "") selected @endif>elige un usuario</option>
                                 @foreach($users as $user)
                                     <option value='{{$user->username}}' @if($authorsUsername['authors5'] == $user->username) selected @endif>{{$user->username}}</option>
                                 @endforeach
@@ -314,7 +314,7 @@
                             name="checkAutor5"
                             id="autor5"
                             checked>
-                        <label for="autor5" class="text-white">Mostrar</label>
+                        <label for="autor5" class="hidden sm:block text-white">Mostrar</label>
                     </div>
                 </div>
             </div>

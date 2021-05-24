@@ -12,19 +12,20 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="icon" href="{{ URL::asset('favicon.ico') }}" type="image/x-icon"/>
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
 
     <!-- Body: Tailwind el "bg" funciona raro, no llena toda la pantalla -->
-    <body class="bg-gradient-to-br from-gray-700 to-gray-800 container mx-auto min-h-screen">
-
+    <body class="bg-gradient-to-br from-gray-700 to-gray-800 min-h-screen">
+        @include('layouts.navigationNew')
         <!-- Pequeño page history: Solo habra un boton de "BACK" -->
         <div class="container mt-5">
 
             <!-- Boton back -->
-            <a class="text-l text-black font-bold bg-white p-2 py-1 rounded" href="{{route('dashboard')}}">BACK</a>
+            <a class="text-l text-black font-bold bg-white p-2 py-1 rounded" href="{{url('/')}}">BACK</a>
 
         </div>
 
@@ -111,6 +112,9 @@
                         </div>
                     </a>
                 @endforeach
+                <div class="my-5 w-full text-white flex justify-center">
+                    {!! $novels->links() !!}
+                </div>
 
             </div>
 
@@ -148,6 +152,7 @@
 
         </div>
 
+        @include('layouts.footer')
     </body>
     
 </html>

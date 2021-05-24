@@ -11,12 +11,13 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="icon" href="{{ URL::asset('favicon.ico') }}" type="image/x-icon"/>
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
-    <body class="bg-gradient-to-br from-gray-700 to-gray-900 min-h-screen container mx-auto min-h-screen">
-
+    <body class="bg-gradient-to-br from-gray-700 to-gray-800 min-h-screen">
+        @include('layouts.navigationNew')
         <!-- Pequeño page history: Solo habra un boton de "BACK" 
         <div class="container mt-5 ">
 
@@ -133,6 +134,7 @@
 
         </div>
 
+        @include('layouts.footer')
     </body>
 
 </html>

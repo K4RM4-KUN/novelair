@@ -4,12 +4,13 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>{{$novel[0]->name}} - {{$chapter[0]->title}}</title>
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Styles -->
+        <link rel="icon" href="{{ URL::asset('favicon.ico') }}" type="image/x-icon"/>
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
         <!-- Scripts -->
@@ -29,6 +30,7 @@
     </head>
     <!-- Body: Tailwind el "bg" funciona raro, no llena toda la pantalla -->
     <body class="bg-gradient-to-br from-gray-700 to-gray-900 min-h-screen container mx-auto min-h-screen">
+        @include('cookieConsent::index')
 
         <div class="flex flex-col">
 
@@ -36,7 +38,7 @@
                 <!-- Boton back -->
                 <div class="flex">
                     <div class="flex-1 text-center">
-                        <a class="text-l text-black font-bold bg-white p-2 py-1 rounded" href="{{route('dashboard')}}">MENU</a>
+                        <a class="text-l text-black font-bold bg-white p-2 py-1 rounded" href="{{url('/')}}">MENU</a>
                     </div>
 
                     <div class="flex-1 text-center">
@@ -126,7 +128,7 @@
                 </div>
                 <div class="flex mb-4 mt-8 sm:mt-4">
                     <div class="flex-1 text-center">
-                        <a class="text-l text-black font-bold bg-white p-2 py-1 rounded" href="{{route('dashboard')}}">MENU</a>
+                        <a class="text-l text-black font-bold bg-white p-2 py-1 rounded" href="{{url('/')}}">MENU</a>
                     </div>
 
                     <div class="flex-1 text-center">

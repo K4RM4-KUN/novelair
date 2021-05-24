@@ -11,6 +11,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="icon" href="{{ URL::asset('favicon.ico') }}" type="image/x-icon"/>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -23,7 +24,8 @@
 </head>
 <body class="bg-gradient-to-br from-gray-700 to-gray-900 min-h-screen">
     
-    @include('layouts.navigationNew')
+    @include('layouts.navigationNew') 
+    @include('cookieConsent::index')
     
     <div class="flex flex-wrap w-11/12 sm:w-10/12 mx-auto bg-black bg-opacity-30">
         <div class="flex | w-full | bg-black bg-opacity-60">
@@ -120,5 +122,6 @@
 
         </div>
     </div>
+        @include('layouts.footer')
 </body>
 </html>
