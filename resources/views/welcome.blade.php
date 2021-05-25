@@ -81,7 +81,7 @@
                     </a>
                 @endforeach
             </div> 
-            <div class="hidden novel flex flex-wrap | w-11/12 | py-1 | bg-black bg-opacity-50">
+            <div class="novel flex flex-wrap | w-11/12 | py-1 | bg-black bg-opacity-50">
                 @foreach($novels as $novel)
                     <a class="w-2/6 sm:w-1/6 " href="{{url('novel/'.$novel->id)}}">
                         <div class="flex flex-col justify-between | h-48 sm:h-40 md:h-52 lg:h-64 xl:h-72 | m-1 | bg-cover bg-no-repeat bg-center" style="background-image:url('{{asset($novel->novel_dir.'/cover'.$novel->imgtype)}}');">
@@ -166,6 +166,7 @@
         @include('layouts.footer')<!--Footer-->
         <script>
             $(document).ready(()=>{ 
+                $('.novel').hide(); 
                 let coverImages = parseInt("{{$covers}}");
                 let actual = 1;
                 let imageInfo = [
