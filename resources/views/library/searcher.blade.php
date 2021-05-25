@@ -214,7 +214,7 @@
             @endif
             
             <!-- Ultimas añadidas -->
-            <p class="text-2xl font-bold text-white | border-b-2 | my-1 mt-5">Ultimas Añadidas</p>&nbsp
+            <p class="text-2xl font-bold text-white | border-b-2 | my-1 mt-5">Últimas añadidas</p>&nbsp
             
             <div class="w-1/1 flex flex-wrap">
                 @foreach($novels as $result)
