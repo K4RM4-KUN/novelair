@@ -40,7 +40,7 @@
                         <p class="text-3xl text-gray-600"><</p>
                     </div>
                     <div>
-                        <img id="cover" class="4/8" src="{{asset('images/homeShow/1.png')}}" alt="">
+                        <img id="cover" class="4/8" src="{{asset('images/homeShow/'.$imgData[0]->getFilename())}}" alt="">
                     </div>
                     <div id="right" class="flex justify-center items-center | rounded-r-xl | bg-gray-200 bg-opacity-60 hover:bg-opacity-80 shadow-xl | px-2 sm:px-4 mx-2 | w-1/8 h-full">
                         <p class="text-3xl text-gray-600">></p>
@@ -164,7 +164,6 @@
         </div>
 
         @include('layouts.footer')<!--Footer-->
-
         <script>
             $(document).ready(()=>{ 
                 let coverImages = parseInt("{{$covers}}");
@@ -175,7 +174,7 @@
                     @endforeach
 
                 ];
-
+                
                 if(coverImages > 1){
                     $('#right').removeClass('bg-white').removeClass('text-gray-700').addClass('bg-black').addClass('text-white');
                 } 
